@@ -1,0 +1,64 @@
+---
+layout: post
+title: "Not in gzip format (Zlib::GzipFile::Error) when trying to run Bundle Install"
+author: Tors
+description:
+  So I was playing around Rails 3.1. I was trying to run bundle install when stumbled upon a very strange error. Not in gzip format (Zlib::GzipFile::Error) when trying to run Bundle Install
+date: 2011-09-28 12:37:24 +0800
+categories:
+- rails3.1
+- rvm
+---
+
+So I was playing around "Rails 3.1 with all the asset pipeline and other cool stuff":/rails-3-dot-1-is-out-with-jquery-by-default-asset-piplining-and-a-bunch-of-good-stuff/.  I was trying to run bundle install when stumbled upon a very strange error.
+
+{% highlight sh %}
+/Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems.rb:594:in `initialize': not in gzip format (Zlib::GzipFile::Error)
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems.rb:594:in `new'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems.rb:594:in `gunzip'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/remote_fetcher.rb:194:in `fetch_path'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/spec_fetcher.rb:254:in `load_specs'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/spec_fetcher.rb:227:in `block in list'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/spec_fetcher.rb:223:in `each'
+	from /Users/tors/.rvm/rubies/ruby-1.9.2-p180/lib/ruby/site_ruby/1.9.1/rubygems/spec_fetcher.rb:223:in `list'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:253:in `fetch_all_remote_specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:234:in `block in remote_specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:231:in `each'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:231:in `remote_specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:165:in `fetch_specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/source.rb:70:in `specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:159:in `block (2 levels) in index'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:158:in `each'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:158:in `block in index'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/index.rb:7:in `build'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:157:in `index'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:151:in `resolve'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:90:in `specs'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/definition.rb:85:in `resolve_remotely!'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/installer.rb:43:in `run'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/installer.rb:8:in `install'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/cli.rb:220:in `install'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/vendor/thor/task.rb:22:in `run'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/vendor/thor/invocation.rb:118:in `invoke_task'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/vendor/thor.rb:263:in `dispatch'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/lib/bundler/vendor/thor/base.rb:386:in `start'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/gems/bundler-1.0.18/bin/bundle:13:in `<top (required)>'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/bin/bundle:19:in `load'
+	from /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/bin/bundle:19:in `<main>'
+{% endhighlight %}
+
+So after googling around I found the answer <a href='"here":http://stackoverflow.com/questions/2494659/strange-bundler-error-tar-input-rb49in-initialize-not-in-gzip-format-zlib' rel='nofollow'>here</a>.
+
+Since I was using RVM, the fix was to just delete the cache directory where my gems are located. 
+
+{% highlight sh %}
+rvm gemset dir
+#/Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final
+{% endhighlight %}
+
+{% highlight sh %}
+rm -r /Users/tors/.rvm/gems/ruby-1.9.2-p180@rails31_final/cache
+{% endhighlight %}
+
+Most probably this is bundler bug but for now this is the easy fix.
+

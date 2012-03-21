@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Heroku now supports Java"
+author: Tors
+date: 2011-08-26 22:14:12 +0800
+description:
+  Heroku originally a Rack cloud Platform as a Service, now opening their doors to Java developers. They are on a winning streak! Last July they extended their support for Node.js and Clojure. Now they have great news for Java developers.
+categories:
+- heroku
+- java
+---
+
+"Heroku":http://www.heroku.com, originally a "Rack":http://rack.rubyforge.org cloud Platform as a Service, now opening their doors to Java developers. They are on a winning streak! Last July they extended their support for Node.js and Clojure. Now they have great news for Java developers.
+
+<blockquote>
+  Using Heroku's platform to run Java apps finally solves the impedance mismatch between application containers designed for traditional software distribution, and the modern world of software-as-a-service.
+
+  In the classic software delivery process (development → packaging → distribution → install → deployment), code passes through many hands before it finally reaches the end user. Developers build, QA verifies, ops deploys, and finally end users can access. In this environment, the feedback loop for information about how code behaves in production is slow and inefficient — it may take weeks or months for this to make it back to developers, and often in a highly-filtered format.
+
+  Heroku is built for the new era of software-as-a-service. An app is built by a small, cross-functional, relatively independent team which builds and deploys everything itself, with few or no hand-offs to other teams. There is no packaging, distribution, or install element because the code never leaves the team/organization. This keeps developers who build the software in close touch with how it behaves in production. And it enables continuous delivery, for a tight feedback loop between customer needs and resulting software built for those needs.
+
+  Java teams are often still stuck with the classic process because it's built into the toolchain. Heroku for Java is optimized for compact applications that require robust, yet agile deployment and rapid iterations. You can deploy any Java application to Heroku, including J2EE applications, but you aren't constrained by the J2EE deployment process.
+</blockquote>
+
+More of the announcement "here":http://blog.heroku.com/archives/2011/8/25/java/.
+
+Here are some Platform at a service options or PaaS for running Java in the cloud:
+
+* "Google App Engine":http://code.google.com/appengine/
+* "Amazon Elastic Beanstalk":http://aws.amazon.com/elasticbeanstalk/
+* "CloudFoundry":http://www.cloudfoundry.com/ (Beta at the time of this writing)
+
+This is awesome news for Heroku and especially to my non-existent Java buddies. Now if they can just accept a war file and run it like AWS Beanstalk it would be perfect.
+
+Get started with Java on Heroku "here":http://devcenter.heroku.com/articles/java.
+

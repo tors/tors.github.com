@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Install a specific git repository branch in Rails"
+author: Tors
+description:
+  Most Rails plugins and gems are now Rails 3. When updating to Rails 3 isn't an option, what you do is you use older version of the plugin. I'll be using ryanb's railscasts.com Here's how you do it.
+  
+categories:
+- git
+- rails
+---
+
+Most Rails plugins and gems are now Rails 3. When updating to Rails 3 isn't an option, what you do is you use older version of the plugin. I'll be using "ryanb's":http://www.railscasts.com. Here's how you do it.
+
+{% highlight sh %}
+script/plugin install git://github.com/ryanb/cancan.git -r 2.0
+{% endhighlight %}
+
+If you are using bundler, it's very straightforward.
+
+{% highlight ruby %}
+gem 'cancan', :git => "http://github.com/ryan/cancan.git", :branch => "2.0"
+{% endhighlight %}
+

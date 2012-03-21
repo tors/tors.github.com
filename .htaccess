@@ -1,0 +1,20 @@
+RewriteEngine On
+
+Redirect 301 /05092011/foreman-and-capistrano-setup-on-ubuntu/ http://www.railscoder.com/foreman-and-capistrano-setup-on-ubuntu/
+Redirect 301 /08092011/installing-tomcat-with-homebrew-on-osx/ http://www.railscoder.com/installing-tomcat-with-homebrew-on-osx/
+Redirect 301 /09092011/setting-up-sinatra-to-use-slim-sass-and-coffeescript/ http://www.railscoder.com/setting-up-sinatra-to-use-slim-sass-and-coffeescript/
+Redirect 301 /15092011/run-middleman-static-site-on-heroku/ http://www.railscoder.com/run-middleman-static-site-on-heroku/
+Redirect 301 /24072011/welcome-to-rails-coder/ http://www.railscoder.com/welcome-to-rails-coder/
+Redirect 301 /25082011/install-a-specific-git-repository-branch-in-rails/ http://www.railscoder.com/install-a-specific-git-repository-branch-in-rails/
+Redirect 301 /26082011/heroku-now-supports-java/ http://www.railscoder.com/heroku-now-supports-java/
+Redirect 301 /27082011/ruby-static-site-generator-alternatives/ http://www.railscoder.com/ruby-static-site-generator-alternatives/
+Redirect 301 /30082011/rails-3-dot-1-is-out-with-jquery-by-default-asset-piplining-and-a-bunch-of-good-stuff/ http://www.railscoder.com/rails-3-dot-1-is-out-with-jquery-by-default-asset-piplining-and-a-bunch-of-good-stuff/
+
+RewriteCond %{HTTP_HOST} ^railscoder.com$ [NC]
+RewriteRule ^(.*)$ http://www.railscoder.com/$1 [R=301,L]
+
+# RedirectMatch ^\/(.+)\/(.+)$ http://www.railscoder.com/$2 [R=301,L]
+
+
+
+

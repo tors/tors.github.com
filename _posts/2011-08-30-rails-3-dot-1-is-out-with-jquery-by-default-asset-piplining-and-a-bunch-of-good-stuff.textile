@@ -1,0 +1,71 @@
+---
+layout: post
+title: "Rails 3.1 is out with jQuery by default, asset pipelining and a bunch of other good stuff"
+author: Tors
+date: 2011-08-30 15:37:14 +0800
+categories:
+- rails3.1
+---
+
+I was actually browsing Twitter when "@tenderlove":https://twitter.com/tenderlove announced that Rails 3.1 has been released. 
+
+Here are some highlights of the major changes in Rails 3.1.0 as posted in the official "RubyOnRails":http://weblog.rubyonrails.org blog.
+
+h3. "ActionPack":https://github.com/rails/rails/blob/3-1-stable/actionpack/CHANGELOG
+
+* ActionPack has been updated to include the new asset pipeline.  Please see the "rails guides on the asset pipeline":http://edgeguides.rubyonrails.org/asset_pipeline.html
+
+* Streaming response support has been added.  This feature allows you to stream templates to the user before processing has actually finished.  See the Rails Guides, or documentation in `ActionController::Metal::Streaming` for more information.  Middleware have been refactored to support this feature.
+
+* RJS has been extracted to a gem.
+
+h3. "ActiveModel":https://github.com/rails/rails/blob/3-1-stable/activemodel/CHANGELOG
+
+* `attr_accessible` and friends now accepts :as as option to specify a role
+* Added `ActiveModel::SecurePassword` to encapsulate dead-simple password usage with BCrypt encryption and salting.
+
+h3. "ActiveRecord":https://github.com/rails/rails/blob/3-1-stable/activerecord/CHANGELOG
+
+* Prepared statement caches have been integrated.  `ActiveRecord::Base#create` and simple finders will use a prepared statement and cache for more performant inserts and selects.
+
+* Associations have been refactored for greater simplicity and maintainability.
+
+* `default_scope` can take any object that responds to `call`.
+
+* PostgreSQL adapter only supports PostgreSQL version 8.2 and higher.
+
+* Migrations use instance methods rather than class methods.  Rather than defining a `self.up` method, you should define an instance method `up`.
+
+* Migrations are reversible.  When a new migration is generated, the migration will contain one method called `change`.  Database changes made in this method will automatically know how to reverse themselves.  For more information, see the documentation for `ActiveRecord::Migration` and `ActiveRecord::Migration::CommandRecorder`.
+
+* When a model is generated, `add_index` is added by default for `belongs_to` or `references` columns.
+
+h3. "ActiveResource":https://github.com/rails/rails/blob/3-1-stable/activeresource/CHANGELOG 
+
+* The default format has been changed to JSON for all requests. If you want to continue to use XML you will need to set `self.format = :xml` in the class.
+
+h3. "ActiveSupport":https://github.com/rails/rails/blob/3-1-stable/activesupport/CHANGELOG
+
+* ActiveSupport::BufferedLogger set log encoding to BINARY, but still use text mode to output portable newlines.
+
+* Add Object#in? to test if an object is included in another object.
+
+* ActiveSupport::Dependencies::ClassCache class has been introduced for holding references to reloadable classes.
+
+* Added `weeks_ago` and `prev_week` to Date/DateTime/Time.
+
+* JSON decoding now uses the `multi_json` gem which also vendors a json engine called OkJson. The yaml backend has been removed in favor of OkJson as a default engine for 1.8.x, while the built in 1.9.x json implementation will be used by default.
+
+h3. "Railties":https://github.com/rails/rails/blob/3-1-stable/railties/CHANGELOG
+
+* The default database schema file is written as UTF-8.
+
+* Rack::Sendfile middleware is used only if `x_sendfile_header` is present.
+
+* Add alias `r` for rails runner.
+
+* jQuery is the new default JavaScript library.
+
+* Added `config.force_ssl` configuration which loads Rack::SSL middleware and force all requests to be under HTTPS protocol
+
+There's too much good stuff on this release. Props to @tenderlove and the rest of the contributors for awesome release.

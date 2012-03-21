@@ -1,0 +1,49 @@
+---
+layout: post
+title: "Run Middleman static site on Heroku"
+author: Tors
+date: 2011-09-15 17:49:51 +0800
+description:
+  Middleman is awesome. It lets me create fast static HTML sites and HTML prototypes as well. So far MM has been very easy to work with in development mode.
+categories:
+- rack
+- heroku
+- middleman
+- static site
+---
+
+<img src="/images/posts/middleman-static-site-generator.png" class="img">
+
+"Middleman":http://www.middlemanapp.com is awesome. It lets me create fast _static HTML sites_ and _HTML prototypes_ as well. So far MM has been very easy to work with in development mode. Though _MM_ is a rack application, it doesn't work if you deploy it to "Heroku":http://heroku.com. Middleman's rack adapter only works in development mode. That said, deploying your middleman site to "Heroku":http://heroku.com is just like deploying Jekyll or any other static sites on Heroku. We will be using "gmarik's":http://gmarik.info/blog/2010/05/10/blogging-with-jekyll-and-heroku-for-free which make use of the "Rack::Static":http://rack.rubyforge.org/ middleware.
+
+Middleman doesn't generate a Gemfile for you by default. You have to create it. Here's my gemfile.
+
+
+{% highlight ruby %}
+source :rubygems
+
+gem 'rack-contrib'
+
+group :development do
+  gem 'middleman'
+  gem 'unicorn'
+end
+{% endhighlight %}
+
+The "rack-contrib":https://github.com/rack/rack-contrib gem includes a variety of add-on components for Rack.
+
+By default, Middleman generates the static files to the `build` directory. Whatever your output directory is, it should be root directory in your Rack::Static configuration. Here's my config.ru file borrowed from _gmarik_.
+
+{% highlight ruby %}
+require 'rack'
+require 'rack/contrib/try_static'
+
+use ::Rack::TryStatic, 
+  :root => "build",    	# where middleman files are generated
+  :urls => %w[/]        	# match all requests
+  :try => ['.html', 'index.html', '/index.html'] # try these postfixes sequentially
+# 404
+run lambda { [404, {'Content-Type' => 'text/plain'}, [' File not found.']]}
+{% endhighlight %}
+
+That's it. Now you can push your MM app to Heroku.

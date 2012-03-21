@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Welcome to RailsCoder"
+author: Tors
+
+description:
+  Finally! I got my stuff together and started this blog. This site should serve as my brain dump as I continue making the Internet a better place by building functional web apps. I have so much yet to learn as a programmer or as a web developer. I'll try to update this blog as often as possible. 
+
+categories:
+- blogging
+---
+
+Finally! I got my stuff together and started this blog. This site should serve as my brain dump as I continue making the Internet a better place by building functional web apps. I have so much yet to learn as a programmer or as a web developer. I'll try to update this blog as often as possible. 
+
+h3. Who are you?
+
+Glad you asked. Check out my <a href='/about.html'>about-me</a> page. If you want to connect, you can reach me at *tors* at *railscoder.com*
+
+Thanks for reading! You can subscribe to my posts here.
+
+
+
+

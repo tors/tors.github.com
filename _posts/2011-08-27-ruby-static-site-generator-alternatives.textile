@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Ruby Static Site Generator Alternatives"
+author: Tors
+date: 2011-08-27 14:49:40 +0800
+description:
+  Which static site generator is the best? Middleman, Jekyll, Nanoc, Staticmatic, Statis, Frank, or Massimo? I'll leave it up to you to choose what's best for your next project. If there's more I can add to this list, let me know.
+  
+categories:
+- jekyll
+- nanoc
+- middleman
+- staticmatic
+- stasis
+- ace
+- frank
+---
+
+I've been using "Middleman":http://www.middlemanapp.com for a while now to create quick mockups. I'm currently using it for a static site project I'm working on. I think the reason I chose MM because it supports "HAML":http://www.haml-lang.com, "SASS":http://sass-lang.com, "Compass":http://www.compass-style.org and "Coffeescript":http://jashkenas.github.com/coffee-script right out of the box which is really convenient. When I started this site I thought about using the bloated Wordpress because it's just a click away. I'm glad I chose Jekyll because it's just as easy and I don't have to deal with PHP. Today I came across yet another site generator called "Statis":http://www.statis.me which looks promising. What's unique about Statis is that it has a controller based preprocessing and you can optionally run it in server mode.
+
+So far, here's my list of static site generators that I've come across Github and the web.
+
+* "Jekyll":https://github.com/mojombo/jekyll
+  Jekyll is a simple, blog aware, static site generator. Supports Textile, Markdown and Liquid converters. Jekyll is behind Github Pages. You can host your project's page right in Github with Jekyll. This site is built using Jekyll.
+  
+* "Middleman":http://www.middlemanapp.com
+Middleman is a static site generator based on Sinatra. Providing dozens of templating languages (Haml, Sass, Compass, Slim, CoffeeScript, and more). Makes minification, compression, cache busting, Yaml data (and more) an easy part of your development cycle.
+
+* "Nanoc":http://nanoc.stoneship.org
+nanoc is a tool that runs on your local computer and compiles documents written in formats such as Markdown, Textile, Haml… into a static web site consisting of simple HTML files, ready for uploading to any web server
+
+* "StaticMatic":https://github.com/staticmatic/staticmatic
+The Lightweight Static Content framework
+
+* "Stasis":http://statis.me
+Stasis is a dynamic framework for static sites.
+
+* "Ace":https://github.com/botanicus/ace
+If you need to generate a lot of pages on the fly, it’s a hassle. It provides helpers, but helpers are – let’s face it – programming style we used to use years back when we yet believed that PHP is actually a really nice language.
+
+* "Frank":https://github.com/blahed/frank
+Inspired by Sinatra's simplicity and ease of use, Frank lets you build static sites using your favorite libs. Frank has a built in development server for previewing work as you develop, an "export" command for compiling and saving your work out to static html and css, and a publish command for copying your exported pages to a server.
+
+* "Massimo":http://massimo.petebrowne.com/
+I found Massimo on Github. Massimo is inspired by Jekyll.
+
+I'll leave it up to you to choose what's best for your next project. If there's more I can add to this list, feel free to email me or comment below.

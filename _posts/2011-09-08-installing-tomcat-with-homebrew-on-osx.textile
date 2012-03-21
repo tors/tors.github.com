@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Installing Tomcat with Homebrew on OSX"
+author: Tors
+date: 2011-09-08 16:43:18 +0800
+description:
+  I needed to run a servlet on my dev machine. Since the project I'm working on is going to be deployed on Amazon Elastic Beanstalk, it makes sense if I use Beanstalk's app server container which, at the time of this writing, only supports Tomcat. I'm on OSX and using homebrew as my package manager so I went ahead and searched a formula for Tomcat.
+
+
+categories:
+- tomcat
+- osx
+- homebrew
+- beanstalk
+---
+
+I needed to run a servlet on my dev machine. Since the project I'm working on is going to be deployed on "Amazon Elastic Beanstalk":http://aws.amazon.com/elasticbeanstalk/, it makes sense that I use Beanstalk's app server container which, at the time of this writing, only supports "Tomcat":http://tomcat.apache.org/. I'm on OSX and using homebrew as my package manager so I went ahead and searched a formula for "Tomcat":http://tomcat.apache.org/.
+
+{% highlight sh %}
+brew search tomcat
+{% endhighlight %}
+
+Homebrew found the formula. Awesome! I went ahead and installed it.
+
+{% highlight sh %}
+brew install tomcat
+{% endhighlight %}
+
+Homebrew will do it's thing and install Tomcat. To check if Tomcat has been installed successfully, you should be able to run the `catalina` command.
+
+{% highlight sh %}
+tors@Tors ~/Binaries $ catalina -h
+Using CATALINA_BASE:   /usr/local/Cellar/tomcat/7.0.20/libexec
+Using CATALINA_HOME:   /usr/local/Cellar/tomcat/7.0.20/libexec
+Using CATALINA_TMPDIR: /usr/local/Cellar/tomcat/7.0.20/libexec/temp
+Using JRE_HOME:        /System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+Using CLASSPATH:       /usr/local/Cellar/tomcat/7.0.20/libexec/bin/bootstrap.jar:/usr/local/Cellar/tomcat/7.0.20/libexec/bin/tomcat-juli.jar
+Usage: catalina.sh ( commands ... )
+commands:
+  debug             Start Catalina in a debugger
+  debug -security   Debug Catalina with a security manager
+  jpda start        Start Catalina under JPDA debugger
+  run               Start Catalina in the current window
+  run -security     Start in the current window with security manager
+  start             Start Catalina in a separate window
+  start -security   Start in a separate window with security manager
+  stop              Stop Catalina, waiting up to 5 seconds for the process to end
+  stop n            Stop Catalina, waiting up to n seconds for the process to end
+  stop -force       Stop Catalina, wait up to 5 seconds and then use kill -KILL if still running
+  stop n -force     Stop Catalina, wait up to n seconds and then use kill -KILL if still running
+  configtest        Run a basic syntax check on server.xml - check exit code for result
+  version           What version of tomcat are you running?
+Note: Waiting for the process to end and use of the -force option require that $CATALINA_PID is defined
+{% endhighlight %}
+
+Note that the help command shows your CATALINA_HOME AND CATALINA_BASE directories.
+
+For the lazy, run Tomcat with:
+
+{% highlight sh %}
+catalina run
+{% endhighlight %}
+
+By default Tomcat runs on port 8080 so if you visit `localhost:8080` you should see something like
+
+!/images/posts/osx-tomcat-homebrew.png!
+
+h3. Hey wait a minute, where do I place the WAR file?
+
+You place your WAR files in /webapps/ROOT relative to your CATALINA_HOME directory. In my case:
+
+{% highlight sh %}
+/usr/local/Cellar/tomcat/7.0.20/libexec/webapps/ROOT
+{% endhighlight %}
+
+Hope that helps.

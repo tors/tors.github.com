@@ -1,0 +1,112 @@
+---
+layout: post
+title: "Foreman and Capistrano Setup with Upstart"
+author: Tors
+date: 2011-09-05 20:56:33 +0800
+description:
+  Foreman is easy to setup in development. You only have to create a Procfile which define the process of your app. You place this Procfile in your project root directory
+categories:
+- ubuntu
+- upstart
+- foreman
+- capistrano
+
+---
+
+Hurrah to "Foreman":https://github.com/ddollar/foreman and props to "@ddollar":https://twitter.com/#!/ddollar for this awesome gem. Now I don't have to open a terminal window for each job or background process.
+
+Foreman is easy to setup in development. You only have to create a Procfile which define the process of your app. You place this Procfile in your project root directory.
+
+{% highlight ruby %}
+web: bundle exec thin start
+worker: bundle exec rake jobs:work
+scheduler: bundle exec rake environment resque:scheduler
+{% endhighlight %}
+
+To start foreman, you run the command below.
+
+{% highlight sh %}
+foreman start
+{% endhighlight %}
+
+Depending on the processes in your procfile, you should see something like:
+
+{% highlight sh %}
+12:59:07 worker.1  | started with pid 64291
+12:59:09 worker.1  | (in /Users/tors/Projects/payrollapp)
+12:59:19 worker.1  | [Worker(host:Tors.local pid:64292)] Starting job worker
+{% endhighlight %}
+
+
+h3. Foreman in Production
+
+Using foreman in production needs a little bit of work. You must also have root access to your remote machine so you can issue commands successfully. Foreman lets you export your configuration to any directory. Since we are using Ubuntu and Upstart, we will put the configuration files in /etc/init directory. In your remote machine:
+
+{% highlight sh %}
+sudo foreman export upstart /etc/init -a payrollapp
+{% endhighlight %}
+
+You should see the following output:
+
+{% highlight sh %}
+[foreman export] writing: /etc/init/payrollapp.conf
+[foreman export] writing: /etc/init/payrollapp-web.conf
+[foreman export] writing: /etc/init/payrollapp-web-1.conf
+[foreman export] writing: /etc/init/payrollapp-worker.conf
+[foreman export] writing: /etc/init/payrollapp-worker-1.conf
+[foreman export] writing: /etc/init/payrollapp-scheduler.conf
+[foreman export] writing: /etc/init/payrollapp-scheduler-1.conf
+{% endhighlight %}
+
+After that you have tell Upstart to start monitoring your app so you issue the following command:
+
+{% highlight sh %}
+sudo start payrollapp
+{% endhighlight %}
+
+h3. How to test if your Foreman and Upstart setup is working
+
+Check if the process is running:
+
+{% highlight sh %}
+ps aux | grep payrollapp
+{% endhighlight %}
+
+If you kill it, it should spawn again.
+
+h3. Using capistrano
+
+If you are using "Capistrano":https://github.com/capistrano/capistrano for deployment, here's a handy snippet (borrowed from "here":http://icelab.com.au/articles/run-your-own-piece-of-heroku-with-foreman ) which you should place in your deploy.rb file.
+
+What this snippet does is it exports your config every time you deploy your code. Edit this to fit your app.
+
+{% highlight ruby %}
+
+namespace :foreman do
+  desc "Export the Procfile to Ubuntu's upstart scripts"
+  task :export, :roles => :app do
+    run "cd /var/payrollapp && sudo bundle exec foreman export upstart /etc/init -a payrollapp -u payrollapp_user -l /var/payrollapp/log"
+  end
+  
+  desc "Start the application services"
+  task :start, :roles => :app do
+    sudo "start payrollapp"
+  end
+
+  desc "Stop the application services"
+  task :stop, :roles => :app do
+    sudo "stop payrollapp"
+  end
+
+  desc "Restart the application services"
+  task :restart, :roles => :app do
+    run "sudo start payrollapp || sudo restart payrollapp"
+  end
+end
+
+after "deploy:update", "foreman:export"
+after "deploy:update", "foreman:restart"
+
+{% endhighlight %}
+
+And that's it. You checkout the _Foreman_ "documentation":http://ddollar.github.com/foreman/ for more command options.
