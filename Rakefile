@@ -102,6 +102,6 @@ HTML
     file.puts post
   end
   puts "new #{type} generated in #{path}"
-  system "open -a textmate #{path}"
+  system "mvim #{path}"
 end
 
