@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Font Smoothing in Mac OS X Lion"
+author: Tors
+date: 2012-04-02 14:41:27 +0800
+categories:
+- osx
+- terminal
+---
+
+I spend most of my time on the Terminal. I'm using an external monitor and once in a while, when I open the Terminal from a cold reboot, I'd lose the font aliasing that I've set. I've never really bothered to solve this maybe because it only happens very rarely. I'm using a ViewSonic display by the way. Anyway, I'll just leave the command here so I don't have to google for it and hopefully it would help others as well.
+
+{% highlight sh %}
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 2
+{% endhighlight %}
+
+Here are the list values that you can set for font smoothing:
+
+* 1 - Light Smoothing
+* 2 - Medium Smoothing (which I'm currently using)
+* 3 - Strong Smoothing
+
+You need to restart your Terminal, Vim, or other apps to be able to see the effect.
+
