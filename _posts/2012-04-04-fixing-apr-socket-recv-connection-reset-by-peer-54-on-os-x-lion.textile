@@ -32,9 +32,9 @@ brew install pcre
 Download the latest from http://httpd.apache.org/download.cgi, then decompress and compile it.
 
 {% highlight sh %}
-curl -O http://ftp.unicamp.br/pub/apache//httpd/httpd-2.3.16-beta.tar.bz2
-tar xvfj httpd-2.3.16-beta.tar.bz2
-cd httpd-2.3.16-beta
+curl -O http://ftp.unicamp.br/pub/apache//httpd/httpd-2.4.1.tar.gz
+tar xvfj httpd-2.4.1.tar.gz
+cd httpd-2.4.1
 ./configure
 make
 {% endhighlight %}
