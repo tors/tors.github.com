@@ -5,6 +5,7 @@ author: Tors
 date: 2012-04-02 14:41:27 +0800
 categories:
 - osx
+- lion
 - terminal
 ---
 
