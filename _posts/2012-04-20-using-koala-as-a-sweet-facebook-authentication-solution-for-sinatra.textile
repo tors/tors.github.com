@@ -9,6 +9,7 @@ categories:
 - facebook
 - authentication
 ---
+I have been playing around with Sinatra recently. It doesn't include all the convenience methods in Rails but I'm blown away by how easily things can get done with Sinatra like the following example.
 
 Here's a simple Sinatra app example that uses the Koala gem to authenticate using Facebook.
 
@@ -73,6 +74,8 @@ class SinatraKoalaFacebookExample < Sinatra::Application
 
 end
 {% endhighlight %}
+
+How cool is that?
 
 Resources:
 
