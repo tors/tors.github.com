@@ -1,0 +1,82 @@
+---
+layout: post
+title: "Using Koala as a sweet Facebook authentication solution for Sinatra"
+author: Tors
+date: 2012-04-20 13:22:13 +0800
+categories:
+- sinatra
+- koala
+- facebook
+- authentication
+---
+
+Here's a simple Sinatra app example that uses the Koala gem to authenticate using Facebook.
+
+{% highlight ruby %}
+APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
+require 'rubygems'
+require 'sinatra'
+require 'koala'
+
+## 
+# Facebook APP ID
+#
+APP_ID = 5353454353
+
+##
+# Facebook APP Secret
+APP_CODE = '534hhdkxj34...'
+
+SITE_URL = 'http://localhost:3000/'
+
+class SinatraKoalaFacebookExample < Sinatra::Application
+
+	include Koala
+
+	set :root, APP_ROOT
+	enable :sessions
+
+	get '/' do
+		if access_token = session['access_token']
+		  'You are logged in! <a href="/logout">Logout</a>'
+			@graph = Koala::Facebook::GraphAPI.new(access_token)
+			@graph.put_wall_post("Oh hai from awesome app!")
+		else
+			'<a href="/login">Login</a>'
+		end
+	end
+
+	get '/login' do
+		##
+    # Generate a new oauth object with your app data and your callback url
+
+		session['oauth'] = Facebook::OAuth.new(APP_ID, APP_CODE, SITE_URL + 'callback')
+
+		##
+    # redirect to facebook to get your code
+		redirect session['oauth'].url_for_oauth_code()
+	end
+
+	get '/logout' do
+		session['oauth'] = nil
+		session['access_token'] = nil
+		redirect '/'
+	end
+
+	##
+  # Handle the redirect from Facebook back to you
+	get '/callback' do
+		session['access_token'] = session['oauth'].get_access_token(params[:code])
+		redirect '/'
+	end
+
+end
+{% endhighlight %}
+
+Resources:
+
+* "Sinatra":http://www.sinatrarb.com/
+* "Koala":http://github.com/arsduo/koala
+* "Source":https://github.com/benben/simple-ruby-facebook-example' 
+
